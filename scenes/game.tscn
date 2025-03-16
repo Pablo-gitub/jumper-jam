@@ -11,25 +11,15 @@ script = ExtResource("1_uwrxv")
 z_index = 100
 position = Vector2(1, 32)
 
-[node name="Platform" parent="." instance=ExtResource("3_lbhrr")]
+[node name="PlatformParent" type="Node2D" parent="."]
 
-[node name="Platform3" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(271, 0)
+[node name="Platform" parent="PlatformParent" instance=ExtResource("3_lbhrr")]
 
-[node name="Platform4" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(407, 0)
-
-[node name="Platform5" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(362, -268)
-
-[node name="Platform6" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(50, -412)
-
-[node name="Platform2" parent="." instance=ExtResource("3_lbhrr")]
+[node name="Platform2" parent="PlatformParent" instance=ExtResource("3_lbhrr")]
 position = Vector2(135, 0)
 
-[node name="Platform7" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(334, -616)
+[node name="Platform3" parent="PlatformParent" instance=ExtResource("3_lbhrr")]
+position = Vector2(271, 0)
 
-[node name="Platform8" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(55, -781)
+[node name="Platform4" parent="PlatformParent" instance=ExtResource("3_lbhrr")]
+position = Vector2(407, 0)
