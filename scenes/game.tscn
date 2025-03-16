@@ -13,11 +13,17 @@ position = Vector2(1, 120)
 
 [node name="Platform" parent="." instance=ExtResource("3_lbhrr")]
 
-[node name="Platform2" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(135, 0)
-
 [node name="Platform3" parent="." instance=ExtResource("3_lbhrr")]
 position = Vector2(271, 0)
 
 [node name="Platform4" parent="." instance=ExtResource("3_lbhrr")]
 position = Vector2(407, 0)
+
+[node name="Platform5" parent="." instance=ExtResource("3_lbhrr")]
+position = Vector2(362, -268)
+
+[node name="Platform6" parent="." instance=ExtResource("3_lbhrr")]
+position = Vector2(50, -412)
+
+[node name="Platform2" parent="." instance=ExtResource("3_lbhrr")]
+position = Vector2(135, 0)
