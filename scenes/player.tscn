@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ojynjngbh2af" path="res://assets/textures/character/Skin1Jump.png" id="2_yjax8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oc1kf"]
-size = Vector2(43.5, 7)
+size = Vector2(43.5, 22)
 
 [sub_resource type="Animation" id="Animation_0mr0g"]
 resource_name = "fall"
@@ -101,7 +101,7 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("1_s551d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(263.25, 733.5)
+position = Vector2(263.25, 726)
 shape = SubResource("RectangleShape2D_oc1kf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
