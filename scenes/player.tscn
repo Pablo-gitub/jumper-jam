@@ -91,7 +91,7 @@ _data = {
 &"jump": SubResource("Animation_v7tvf")
 }
 
-[node name="player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_yjax8")
 
