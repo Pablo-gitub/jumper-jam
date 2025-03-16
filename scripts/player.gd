@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 var speed = 300.0
 
@@ -17,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity
 	if velocity.y >= max_fall_velocity:
 		velocity.y = max_fall_velocity
-	print(velocity.y)
+	
 	var direction = Input.get_axis("move_left","move_right")
 	if direction:
 		velocity.x = direction * speed
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		global_position.x = viewport_size.x/2 + margin
 		
 	if global_position.y > viewport_size.y/2 + margin:
-		global_position.y = -viewport_size.y/2 - margin
-	if global_position.y < -viewport_size.y/2 - margin:
+		global_position.y = -viewport_size.y + margin*10
+	if global_position.y < -viewport_size.y - margin:
 		global_position.y = viewport_size.y/2 + margin
 	
