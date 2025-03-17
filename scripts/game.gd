@@ -9,8 +9,15 @@ func _ready() -> void:
 	camera = camera_scene.instantiate()
 	camera.setup_camera($Player)
 	add_child(camera)
-	create_platform(Vector2(100, -300))
-
+	#Generate the ground
+	var viewport_size = get_viewport_rect().size
+	var platform_with = 136
+	var ground_layer_platform_count = ( viewport_size.x / platform_with ) + 1
+	var ground_layer_y_offset = 62
+	for i in range(ground_layer_platform_count):
+		var ground_location = Vector2(i * platform_with, 0)
+		create_platform(ground_location)
+	 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
