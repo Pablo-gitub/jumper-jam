@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddifcfispf808"]
+[gd_scene load_steps=7 format=3 uid="uid://ddifcfispf808"]
 
 [ext_resource type="Script" uid="uid://7dq2pjfpecxc" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://jrbnf2ilace2" path="res://scenes/level_generator.tscn" id="3_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://buiobdcu6rbt8" path="res://assets/textures/bg/Ground.png" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://nke1j2vumadv" path="res://assets/textures/bg/Layer1.png" id="4_p57ef"]
+[ext_resource type="Texture2D" uid="uid://csi10jq2aowf8" path="res://assets/textures/bg/Layer2.png" id="5_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://b5sw24g2ufiw" path="res://assets/textures/bg/Layer3.png" id="6_gee14"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uwrxv")
@@ -15,3 +18,32 @@ position = Vector2(270, 960)
 scale = Vector2(1, 0.7)
 texture = ExtResource("3_lnu2h")
 offset = Vector2(0, -61)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(0, 1935.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("4_p57ef")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(0, 1935.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("5_u5sy4")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.85, 0.85)
+motion_mirroring = Vector2(0, 1935.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("6_gee14")
+centered = false
