@@ -20,11 +20,11 @@ func _ready() -> void:
 	rect_shape.set_size(rect_shape_size)
 	destroyer_shape.shape = rect_shape
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player:
 		var limit_distance = 500
 		if limit_bottom > get_camera_target_to_player(player, limit_distance):
-			limit_bottom = get_camera_target_to_player(player, limit_distance)
+			limit_bottom = int(get_camera_target_to_player(player, limit_distance))
 			
 	var overlapping_areas = destroyer.get_overlapping_areas()
 	if overlapping_areas.size() > 0:
@@ -36,9 +36,9 @@ func setup_camera(_player: Player):
 	if _player:
 		player = _player
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player:
 		global_position.y = get_camera_target_to_player(player)
 		
-func get_camera_target_to_player(player: Player, limit_distance: float = 0) -> float:
+func get_camera_target_to_player(_player: Player, limit_distance: float = 0) -> float:
 	return player.global_position.y + viewport_size.y / 2 + limit_distance
