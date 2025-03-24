@@ -1,18 +1,21 @@
 extends Node2D
 
-@onready var player = $Player
 @onready var level_generator = $LevelGenerator
+
+var player_scene = preload("res://scenes/player.tscn")
+var player: Player = null
+var player_spam_pos: Vector2 = Vector2()
 
 var camera_scene = preload("res://scenes/game_camera.tscn")
 var camera = null
 
 
 func _ready() -> void:
-	camera = camera_scene.instantiate()
-	camera.setup_camera($Player)
-	add_child(camera)
-	if player:
-		level_generator.setup(player)
+	var viewport_size = get_viewport_rect().size
+	var player_spam_pos_y_offset = 35
+	player_spam_pos.x = 0  
+	player_spam_pos.y = 0 + player_spam_pos_y_offset
+	new_game()
 	 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
@@ -20,4 +23,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
 	
+func new_game():
+	player = player_scene.instantiate()
+	player.global_position = player_spam_pos
+	add_child(player)
+	
+	camera = camera_scene.instantiate()
+	camera.setup_camera($Player)
+	add_child(camera)
+	if player:
+		level_generator.setup(player)
 	
