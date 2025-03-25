@@ -4,15 +4,21 @@ class_name Player
 @onready var animator = $AnimationPlayer
 
 var speed = 300.0
+var accelerometer_speed = 130.0
 
 var gravity = 15.0
 var max_fall_velocity = 1000.0
 var jump_velocity = -800
 
 var viewport_size 
+var use_accelerometer = false
 
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
+	
+	var os_name = OS.get_name()
+	if os_name == "Android" || os_name == "iOS":
+		use_accelerometer = true
 
 func _process(_delta: float) -> void:
 	if velocity.y > 0:
@@ -26,12 +32,17 @@ func _physics_process(_delta: float) -> void:
 	velocity.y += gravity
 	if velocity.y >= max_fall_velocity:
 		velocity.y = max_fall_velocity
-	
-	var direction = Input.get_axis("move_left","move_right")
-	if direction:
-		velocity.x = direction * speed
+		
+	if use_accelerometer:
+		var mobile_input = Input.get_accelerometer()
+		velocity.x = mobile_input.x * accelerometer_speed
+		print("Accelerometer: " + str(mobile_input))
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		var direction = Input.get_axis("move_left","move_right")
+		if direction:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 		
 	move_and_slide()
 	
