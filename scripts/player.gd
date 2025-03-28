@@ -36,7 +36,6 @@ func _physics_process(_delta: float) -> void:
 	if use_accelerometer:
 		var mobile_input = Input.get_accelerometer()
 		velocity.x = mobile_input.x * accelerometer_speed
-		print("Accelerometer: " + str(mobile_input))
 	else:
 		var direction = Input.get_axis("move_left","move_right")
 		if direction:
