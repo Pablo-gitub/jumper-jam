@@ -20,6 +20,8 @@ func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	generate_platform_count = 0
 	start_platform_y = - y_distance_between_platforms
+	
+func start_generation():
 	generate_level(start_platform_y, true)
 	
 func _process(_delta: float) -> void:

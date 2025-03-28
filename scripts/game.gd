@@ -5,6 +5,7 @@ extends Node2D
 @onready var parallax1 = $ParallaxBackground/ParallaxLayer
 @onready var parallax2 = $ParallaxBackground/ParallaxLayer2
 @onready var parallax3 = $ParallaxBackground/ParallaxLayer3
+@onready var hud = $UILayer/HUD
 
 var player_scene = preload("res://scenes/player.tscn")
 var player: Player = null
@@ -20,12 +21,15 @@ func _ready() -> void:
 	var player_spam_pos_y_offset = 35
 	player_spam_pos.x = 0  
 	player_spam_pos.y = 0 + player_spam_pos_y_offset
+	
 	ground_sprite.global_position.x = viewport_size.x/2
 	ground_sprite.global_position.y = viewport_size.y
+	
 	setup_parallax_layer(parallax1)
 	setup_parallax_layer(parallax2)
 	setup_parallax_layer(parallax3)
-	new_game()
+	
+	hud.visible = false
 	
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
 	var parallax_texture = parallax_sprite.get_texture()
@@ -57,6 +61,10 @@ func new_game():
 	camera = camera_scene.instantiate()
 	camera.setup_camera(player)
 	add_child(camera)
+	
 	if player:
 		level_generator.setup(player)
+		level_generator.start_generation()
+	
+	hud.visible = true
 	

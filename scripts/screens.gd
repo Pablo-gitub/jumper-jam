@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal start_game
+
 @onready var console = $Debug/ConsoleLog
 @onready var title_screen = $TitleScreen
 @onready var pause_screen = $PauseScreen
@@ -23,8 +25,9 @@ func register_button():
 func _on_button_pressed(button):
 	match button.name:
 		"TitlePlay":
-			print("TitleButton is pressed")
-			change_screen(pause_screen)
+			change_screen(null)
+			await(get_tree().create_timer(0.5).timeout)
+			start_game.emit()
 		"PauseRetry":
 			print("Pause Retry")
 			change_screen(game_over_screen)

@@ -7,6 +7,9 @@ var player: Player = null
 var viewport_size
 
 func _ready() -> void:
+	#if player:
+		#global_position.y = get_camera_target_to_player(player)
+		
 	viewport_size = get_viewport_rect().size
 	global_position.x = viewport_size.x / 2
 	#Definition of camera limits
