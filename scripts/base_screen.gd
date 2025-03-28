@@ -2,9 +2,18 @@ extends Control
 
 func _ready() -> void:
 	visible = false
+	modulate.a = 0.0
+	get_tree().call_group("buttons", "set_disabled", true)
 
 func appear():
 	visible = true
+	return tween_animation(1.0)
 	
 func disappear():
-	visible = false
+	get_tree().call_group("buttons", "set_disabled", true)
+	return tween_animation(0.0)
+
+func tween_animation(alpha):
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate:a", alpha, 1)
+	return tween

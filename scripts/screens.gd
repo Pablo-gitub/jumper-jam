@@ -24,15 +24,17 @@ func _on_button_pressed(button):
 	match button.name:
 		"TitlePlay":
 			print("TitleButton is pressed")
-			change_screen(null)
+			change_screen(pause_screen)
 		"PauseRetry":
 			print("Pause Retry")
+			change_screen(game_over_screen)
 		"PauseBack":
 			print("Pause Back")
 		"PauseClose":
 			print("Pause Close")
 		"GameOverRetry":
 			print("Game Over Retry")
+			change_screen(title_screen)
 		"GameOverBack":
 			print("Game Over Back")
 
@@ -45,9 +47,13 @@ func _on_toggle_console_pressed() -> void:
 	
 func change_screen(new_screen):
 	if current_screen:
-		current_screen.disappear()
+		var disappear_tween = current_screen.disappear()
+		await(disappear_tween.finished)
+		current_screen.visible = false
 	current_screen = new_screen
 	if current_screen:
-		current_screen.appear()
+		var appear_tween = current_screen.appear()
+		await(appear_tween.finished)
+		get_tree().call_group("buttons", "set_disabled", false)
 	
 	
