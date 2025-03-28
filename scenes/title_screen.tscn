@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhgoav07sj4e8"]
+[gd_scene load_steps=8 format=3 uid="uid://dhgoav07sj4e8"]
 
 [ext_resource type="Texture2D" uid="uid://osxj8jyjmmio" path="res://assets/textures/ui/BigLogo.png" id="1_fgkus"]
+[ext_resource type="Script" uid="uid://detd1rahmmgae" path="res://scripts/base_screen.gd" id="1_mgrm8"]
 [ext_resource type="PackedScene" uid="uid://birivcms6s4fx" path="res://scenes/screen_button.tscn" id="2_s4lrb"]
 [ext_resource type="Texture2D" uid="uid://y1oshrsqm3p0" path="res://assets/textures/ui/PlayBtn.png" id="3_mgrm8"]
 
@@ -11,7 +12,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Play:position")
+tracks/0/path = NodePath("Control/TitlePlay:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +27,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Play:position")
+tracks/0/path = NodePath("Control/TitlePlay:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mgrm8")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -80,7 +82,7 @@ grow_vertical = 2
 texture = ExtResource("1_fgkus")
 expand_mode = 1
 
-[node name="Play" parent="Control" instance=ExtResource("2_s4lrb")]
+[node name="TitlePlay" parent="Control" instance=ExtResource("2_s4lrb")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
