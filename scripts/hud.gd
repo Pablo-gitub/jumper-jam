@@ -13,6 +13,9 @@ func _ready() -> void:
 			var screen_scale = DisplayServer.screen_get_scale()
 			safe_area_top = (safe_area_top / screen_scale)
 			MyUtility.add_log_msg("screen scale: " + str(screen_scale))
+		else:
+			safe_area_top = (safe_area_top / 4)
+			MyUtility.add_log_msg("screen scale: " + str(safe_area_top))
 		
 		topbar.position.y += safe_area_top
 		var margin = 10
