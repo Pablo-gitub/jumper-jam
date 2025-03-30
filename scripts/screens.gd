@@ -6,6 +6,8 @@ signal start_game
 @onready var title_screen = $TitleScreen
 @onready var pause_screen = $PauseScreen
 @onready var game_over_screen = $GameOverScreen
+@onready var game_over_score_label = $GameOverScreen/Box/ScoreLabel
+@onready var game_over_high_score_label = $GameOverScreen/Box/HighScoreLabel
 
 var current_screen = null
 
@@ -59,4 +61,7 @@ func change_screen(new_screen):
 		await(appear_tween.finished)
 		get_tree().call_group("buttons", "set_disabled", false)
 	
-	
+func game_over(score, high_score):
+	game_over_score_label.text = "Score: " + str(score)
+	game_over_high_score_label.text = "Best: " + str(high_score)
+	change_screen(game_over_screen)

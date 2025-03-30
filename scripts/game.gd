@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_died(score, high_score)
+
 @onready var level_generator = $LevelGenerator
 @onready var ground_sprite = $GroundSprite
 @onready var parallax1 = $ParallaxBackground/ParallaxLayer
@@ -56,6 +58,7 @@ func _process(_delta: float) -> void:
 func new_game():
 	player = player_scene.instantiate()
 	player.global_position = player_spam_pos
+	player.died.connect(_on_player_died)
 	add_child(player)
 	
 	camera = camera_scene.instantiate()
@@ -68,3 +71,6 @@ func new_game():
 	
 	hud.visible = true
 	
+func _on_player_died():
+	hud.visible = false
+	player_died.emit(1998, 9881)
