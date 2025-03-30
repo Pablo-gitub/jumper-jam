@@ -46,7 +46,8 @@ func generate_level(start_y: float, generate_ground: bool):
 	for i in range(level_size):
 		var location: Vector2 = Vector2.ZERO
 		var max_x_position = viewport_size.x-platform_with
-		location.x = randf_range( 0.0, max_x_position )
+		var random_x = randf_range( 0.0, max_x_position )
+		location.x = random_x
 		location.y = start_y - (i * y_distance_between_platforms)
 		create_platform(location)
 		generate_platform_count += 1
@@ -56,3 +57,9 @@ func create_platform(location: Vector2):
 	platform.global_position = location
 	platform_parent.add_child(platform)
 	return platform
+
+func reset_level():
+	generate_platform_count = 0
+	for platform in platform_parent.get_children():
+		platform.queue_free()
+		

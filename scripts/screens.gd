@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+signal delete_level
 
 @onready var console = $Debug/ConsoleLog
 @onready var title_screen = $TitleScreen
@@ -38,10 +39,12 @@ func _on_button_pressed(button):
 		"PauseClose":
 			print("Pause Close")
 		"GameOverRetry":
-			print("Game Over Retry")
-			change_screen(title_screen)
+			change_screen(null)
+			await(get_tree().create_timer(0.5).timeout)
+			start_game.emit()
 		"GameOverBack":
-			print("Game Over Back")
+			change_screen(title_screen)
+			delete_level.emit()
 
 func _process(delta: float) -> void:
 	pass

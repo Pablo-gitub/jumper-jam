@@ -32,6 +32,7 @@ func _ready() -> void:
 	setup_parallax_layer(parallax3)
 	
 	hud.visible = false
+	ground_sprite.visible = false
 	
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
 	var parallax_texture = parallax_sprite.get_texture()
@@ -56,6 +57,8 @@ func _process(_delta: float) -> void:
 		get_tree().reload_current_scene()
 	
 func new_game():
+	reset_game()
+	
 	player = player_scene.instantiate()
 	player.global_position = player_spam_pos
 	player.died.connect(_on_player_died)
@@ -70,7 +73,19 @@ func new_game():
 		level_generator.start_generation()
 	
 	hud.visible = true
+	ground_sprite.visible = true
 	
 func _on_player_died():
 	hud.visible = false
 	player_died.emit(1998, 9881)
+	
+func reset_game():
+	ground_sprite.visible = false
+	level_generator.reset_level()
+	if player != null:
+		player.queue_free()
+		player = null
+		level_generator.player = null
+	if camera != null:
+		camera.queue_free()
+		camera = null
