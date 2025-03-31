@@ -1,6 +1,7 @@
 extends Node2D
 
 signal player_died(score, high_score)
+signal pause_game
 
 @onready var level_generator = $LevelGenerator
 @onready var ground_sprite = $GroundSprite
@@ -18,6 +19,7 @@ var camera = null
 var viewport_size : Vector2
 var score: int = 0
 var high_score: int = 0
+var save_file_path = "user://highscore.save"
 
 
 func _ready() -> void:
@@ -35,7 +37,9 @@ func _ready() -> void:
 	
 	hud.visible = false
 	hud.set_score(0)
+	hud.pause_game.connect(_on_hud_pause_game)
 	ground_sprite.visible = false
+	load_score()
 	
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
 	var parallax_texture = parallax_sprite.get_texture()
@@ -86,13 +90,17 @@ func new_game():
 	
 func _on_player_died():
 	hud.visible = false
+	
 	if score > high_score:
 		high_score = score
+		save_score()
+		
 	player_died.emit(score, high_score)
 	
 func reset_game():
 	ground_sprite.visible = false
 	level_generator.reset_level()
+	hud.visible = false
 	if player != null:
 		player.queue_free()
 		player = null
@@ -100,3 +108,19 @@ func reset_game():
 	if camera != null:
 		camera.queue_free()
 		camera = null
+
+func save_score():
+	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
+	file.store_var(high_score)
+	file.close()
+	
+func load_score():
+	if FileAccess.file_exists(save_file_path):
+		var file = FileAccess.open(save_file_path, FileAccess.READ)
+		high_score = file.get_var()
+		file.close()
+	else:
+		high_score = 0
+		
+func _on_hud_pause_game():
+	pause_game.emit()
