@@ -16,6 +16,8 @@ var player_spam_pos: Vector2 = Vector2()
 var camera_scene = preload("res://scenes/game_camera.tscn")
 var camera = null
 var viewport_size : Vector2
+var score: int = 0
+var high_score: int = 0
 
 
 func _ready() -> void:
@@ -32,6 +34,7 @@ func _ready() -> void:
 	setup_parallax_layer(parallax3)
 	
 	hud.visible = false
+	hud.set_score(0)
 	ground_sprite.visible = false
 	
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
@@ -55,6 +58,11 @@ func _process(_delta: float) -> void:
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+		
+	if player:
+		if score < - player.global_position.y:
+			score = - player.global_position.y
+			hud.set_score(score)
 	
 func new_game():
 	reset_game()
@@ -74,10 +82,13 @@ func new_game():
 	
 	hud.visible = true
 	ground_sprite.visible = true
+	score = 0
 	
 func _on_player_died():
 	hud.visible = false
-	player_died.emit(1998, 9881)
+	if score > high_score:
+		high_score = score
+	player_died.emit(score, high_score)
 	
 func reset_game():
 	ground_sprite.visible = false

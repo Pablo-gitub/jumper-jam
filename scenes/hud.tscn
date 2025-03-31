@@ -41,13 +41,12 @@ offset_bottom = 83.0
 texture = ExtResource("1_oo0fn")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TopBar"]
+[node name="ScoreLabel" type="Label" parent="TopBar"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 15.0
 offset_right = 274.0
 offset_bottom = 75.0
-text = "99999"
 label_settings = SubResource("LabelSettings_6fi6k")
 horizontal_alignment = 2
 vertical_alignment = 1
