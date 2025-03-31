@@ -12,6 +12,9 @@ func _ready() -> void:
 	game.player_died.connect(_on_game_player_died)
 	game.pause_game.connect(_on_game_pause_game)
 	
+	#IAP signals
+	screens.purchase_skin.connect(_on_screens_purchase_skin)
+	
 func _on_window_event(event):
 	match event:
 		DisplayServer.WINDOW_EVENT_FOCUS_IN:
@@ -42,3 +45,7 @@ func _on_game_player_died(score, high_score):
 func _on_game_pause_game():
 	get_tree().paused = true
 	screens.pause_game()
+	
+func _on_screens_purchase_skin():
+	if !game.new_skin_unlocked:
+		game.new_skin_unlocked = true
