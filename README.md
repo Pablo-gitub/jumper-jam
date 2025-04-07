@@ -23,7 +23,7 @@ But be careful! Falling means game over.
 
 ## 📷 Screenshots
 
-<img src="screenshots/screenshot_android.png" width="300"/>
-<img src="screenshots/record_game.mov" width="300"/>
+<img src="Screenshots/screenshot_android.png" width="300"/>
+<img src="Screenshots/record_game.mov" width="300"/>
 
 ---
